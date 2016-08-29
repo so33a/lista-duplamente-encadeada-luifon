@@ -106,3 +106,20 @@ link buscaMenor(ListaDupla l){
 
 	return menor;
 }
+link ordenar(ListaDupla l, int z){
+	ListaDupla p, t;
+	link aux;
+	p = malloc(sizeof(*p));
+	t = malloc(sizeof(*t));
+	
+	for (p = L; p != z; p = p->next){
+		for (t = p->next; t != NULL; t = t->next){
+			if (p->item > t-> item){
+				aux->item = p->item;
+				p->item = t->item;
+				t->item = aux->item;
+			}
+		}
+	}
+	return l;
+}
