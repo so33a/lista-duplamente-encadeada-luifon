@@ -22,7 +22,7 @@ ListaDupla inicializa() {
   ListaDupla aux;
   aux = malloc(sizeof *aux);
   aux->head = NULL;
-  aux->z = novoNo(0, NULL, NULL);
+  aux->z = novoNo(NULL, NULL, NULL);
   return aux;
 }
 
@@ -32,7 +32,7 @@ void insereDepois (ListaDupla l, link x, link t) {
     t->next = l->z;
     t->prev = l->z;
     l->z->prev = t;
-    l->z->next = t; 
+    l->z->next = t;
   } else {
     t->next = x->next;
     t->prev = x;
@@ -74,7 +74,7 @@ link buscar(ListaDupla l, int item) {
   }
   return NULL;
 }
-/* 
+/*
 void insereAntes (ListaDupla l, link x, link t);
 */
 
@@ -84,15 +84,14 @@ void destroiLista(ListaDupla l) {
     l->head = t->next;
     l->z->next = t->next;
     l->head->prev = l->z;
-    free(t); 
+    free(t);
     t = l->head;
-  } 
+  }
   free(t);
   free(l);
 }
 
 link buscaMenor(ListaDupla l){
-	int i = 0;
 	link atual = l->head;
 	link menor = atual;
 
@@ -101,25 +100,21 @@ link buscaMenor(ListaDupla l){
 			menor = atual;
 		}
 		atual = atual->next;
-		i++;
 	}
 
 	return menor;
 }
-link ordenar(ListaDupla l, int z){
-	ListaDupla p, t;
-	link aux;
-	p = malloc(sizeof(*p));
-	t = malloc(sizeof(*t));
-	
-	for (p = L; p != z; p = p->next){
-		for (t = p->next; t != NULL; t = t->next){
-			if (p->item > t-> item){
-				aux->item = p->item;
+void ordenar(ListaDupla l){
+	link p, t;
+	int aux;
+	for (p = l->head; p->item != NULL; p = p->next){
+		for (t = p->next; t->item != NULL; t = t->next){
+			if ((p->item) > (t->item)){
+				aux = p->item;
 				p->item = t->item;
-				t->item = aux->item;
+				t->item = aux;
 			}
+
 		}
 	}
-	return l;
 }
