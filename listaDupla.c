@@ -21,24 +21,20 @@ link novoNo (int item, link prev, link next) {
 ListaDupla inicializa() {
   ListaDupla aux;
   aux = malloc(sizeof *aux);
-  aux->head = NULL;
-  aux->z = novoNo(NULL, NULL, NULL);
+  aux->z = novoNo(0, NULL, NULL);
+  aux->head = aux->z;
+  aux->z->next = aux->z->prev = aux->head;
   return aux;
 }
 
 void insereDepois (ListaDupla l, link x, link t) {
-  if (x == NULL) {
-    l->head = t;
-    t->next = l->z;
-    t->prev = l->z;
-    l->z->prev = t;
-    l->z->next = t;
-  } else {
+    if (l->head == l->z) 
+	l->head = t;
+
     t->next = x->next;
     t->prev = x;
     x->next = t;
     t->next->prev = t;
-  }
 }
 
 link removeNo (link x) {
@@ -107,8 +103,8 @@ link buscaMenor(ListaDupla l){
 void ordenar(ListaDupla l){
 	link p, t;
 	int aux;
-	for (p = l->head; p->item != NULL; p = p->next){
-		for (t = p->next; t->item != NULL; t = t->next){
+	for (p = l->head; p!=l->z; p = p->next){
+		for (t = p->next; t != l->z; t = t->next){
 			if ((p->item) > (t->item)){
 				aux = p->item;
 				p->item = t->item;
